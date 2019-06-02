@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
   const taskProvider = vscode.tasks.registerTaskProvider("lll", {
     provideTasks: () => {
       if (!lllPromise) {
-        lllPromise = getRakeTasks();
+        lllPromise = getLllTasks();
       }
       return lllPromise;
     },
@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
   });
 }
 
-async function getRakeTasks(): Promise<vscode.Task[]> {
+async function getLllTasks(): Promise<vscode.Task[]> {
 
   const tasks: vscode.Task[] = [];
 
