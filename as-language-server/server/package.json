@@ -1,0 +1,12 @@
+{
+  "name": "line-length-linter-language-server",
+  "description": "Line Length Linter Language Server",
+  "version": "1.0.0",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "vscode-languageserver": "^5.2.1"
+  },
+  "scripts": {}
+}
