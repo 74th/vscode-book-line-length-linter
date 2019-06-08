@@ -7,11 +7,10 @@
 		"vscode": "^1.29.0"
 	},
 	"categories": [
-		"Other"
+		"Linters"
 	],
 	"activationEvents": [
-		"onCommand:workbench.action.tasks.runTask",
-		"*"
+		"onCommand:workbench.action.tasks.runTask"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

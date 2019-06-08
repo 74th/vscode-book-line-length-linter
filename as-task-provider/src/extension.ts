@@ -31,7 +31,6 @@ async function getLllTasks(): Promise<vscode.Task[]> {
   if (!vscode.workspace.workspaceFolders || vscode.workspace.workspaceFolders.length === 0) {
     return tasks;
   }
-  const regex = /^([^\s]+):(\d+):\s(.*)$/;
 
   for (const workspaceFolder of vscode.workspace.workspaceFolders) {
     let task = new vscode.Task(
