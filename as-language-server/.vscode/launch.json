@@ -13,6 +13,14 @@
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
             ]
+        },
+        {
+            "name": "Language Server",
+            "type": "node",
+            "request": "attach",
+            "port": 6010,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "${workspaceRoot}",
         }
     ]
 }

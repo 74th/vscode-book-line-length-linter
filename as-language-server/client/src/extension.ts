@@ -1,51 +1,54 @@
 import * as path from "path";
 import * as vscode from "vscode";
-import {
-  LanguageClient,
-  LanguageClientOptions,
-  ServerOptions,
-  TransportKind
-} from "vscode-languageclient";
+import * as ls from "vscode-languageclient";
 
-let client: LanguageClient;
+let client: ls.LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
-  let serverModule = context.asAbsolutePath(
-    path.join("server", "out", "server.js")
-  );
+  // Language Server のプログラムのパス
+  let serverModule = path.join("server", "out", "server.js")
 
-  let debugOptions = {
-    execArgv: ["--nolazy", "--inspect=6010"]
-  };
-
-  let serverOptions: ServerOptions = {
+  // Language Server の設定
+  let serverOptions: ls.ServerOptions = {
     run: {
       module: serverModule,
-      transport: TransportKind.ipc
+      transport: ls.TransportKind.ipc
     },
     debug: {
       module: serverModule,
-      transport: TransportKind.ipc,
-      options: debugOptions
+      transport: ls.TransportKind.ipc,
+      // デバッグオプションはデバッグ時のみ付与する
+      options: {
+        execArgv: ["--nolazy", "--inspect=6010"]
+      }
     }
   };
 
-  let clientOptions: LanguageClientOptions = {
-    documentSelector: [{scheme:"file"}],
-    // documentSelector: [{ scheme: "file", language: "plaintext" }],
+  const documentSelector = [
+    { scheme: "file" },
+  ] as ls.DocumentSelector;
+
+  // Language Client の設定
+  const clientOptions: ls.LanguageClientOptions = {
+    documentSelector,
+    // 同期する設定項目
     synchronize: {
+      // "lll."の設定を指定しています
       configurationSection: "lll",
-      fileEvents: vscode.workspace.createFileSystemWatcher("**/.lllrc")
     }
   };
 
-  client = new LanguageClient(
+  // Language Client の作成
+  client = new ls.LanguageClient(
+    // 拡張機能のID
     "line-length-linter",
+    // ユーザ向けの名前（出力ペインで使用されます）
     "Line Length Linter",
     serverOptions,
     clientOptions
   );
 
+  // Language Client の開始
   client.start();
 }
 
