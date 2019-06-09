@@ -9,12 +9,13 @@ export function activate(context: vscode.ExtensionContext) {
     'Congratulations, your extension "line-length-linter" is now active!'
   );
 
-  let lllPromise: Thenable<vscode.Task[]> | undefined = undefined;
-  const taskProvider = vscode.tasks.registerTaskProvider("lll", {
+  const disposable = vscode.tasks.registerTaskProvider("lll", {
     provideTasks: getLllTasks,
     // 現在、resolveTaskは未実装
     resolveTask: resolveTask,
   });
+  context.subscriptions.push(disposable);
+
 }
 
 /**
