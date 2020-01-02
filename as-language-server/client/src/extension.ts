@@ -6,7 +6,7 @@ let client: ls.LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
   // Language Server のプログラムのパス
-  let serverModule = path.join("server", "out", "server.js")
+  let serverModule = context.asAbsolutePath(path.join('server', 'out', 'server.js'));
 
   // Language Server の設定
   let serverOptions: ls.ServerOptions = {
